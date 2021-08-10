@@ -65,7 +65,7 @@ class DB{
             }
         }
 
-        //echo $sql;
+       //echo $sql;
         return $this->pdo->query($sql)->fetchColumn();
 
     }

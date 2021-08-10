@@ -11,7 +11,15 @@
     </tr>
     <tr>
         <td class="tt ct">驗證碼</td>
-        <td class="pp"><input type="text" name="chk" id="chk"></td>
+        <td class="pp">
+        <?php
+            $a=rand(10,99);
+            $b=rand(10,99);
+            
+            $_SESSION['ans']=$a+$b;
+            echo $a . " + " . $b . " = "
+        ?>    
+        <input type="text" name="chk" id="chk"></td>
     </tr>
 </table>
-<div class="ct"><button>確認</button></div>
+<div class="ct"><button onclick="login('admin')">確認</button></div>
