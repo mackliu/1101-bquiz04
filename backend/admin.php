@@ -1,4 +1,4 @@
-<div class="ct"><button>新增管理員</button></div>
+<div class="ct"><button onclick="location.href='?do=add_admin'">新增管理員</button></div>
 
 <table class="all">
     <tr class='tt ct'>
