@@ -4,7 +4,7 @@ date_default_timezone_set("Asia/Taipei");
 //設定後台的抬頭文字
 
 class DB{
-    private $dsn="mysql:host=localhost;charset=utf8;dbname=db04";
+    private $dsn="mysql:host=localhost;charset=utf8;dbname=web04";
     private $root='root';
     private $password='12345';
     private $table;
@@ -150,5 +150,7 @@ function to($url){
     header("location:".$url);
 }
 
+
+$Bot=new DB('bot');
 
 ?>
