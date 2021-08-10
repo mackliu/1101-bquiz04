@@ -8,7 +8,7 @@
         <td class="tt">帳號</td>
         <td class="pp">
             <input type="text" name="acc" id="acc">
-            <button onclick="chkAcc()">檢測帳號</button>
+            <button onclick="chkAcc('mem')">檢測帳號</button>
     </td>
     </tr>
     <tr>
@@ -30,4 +30,5 @@
         <td class="pp"><input type="text" name="email" id="email"></td>
     </tr>
 </table>
-<div class="ct"><button>註冊</button><button>重置</button></div>
+<div class="ct"><button onclick="reg()">註冊</button><button onclick="resetForm()">重置</button></div>
+
