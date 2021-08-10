@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>┌精品電子商務網站」</title>
-<link href="./home_files/css.css" rel="stylesheet" type="text/css">
-<script src="./home_files/js.js"></script>
+<link href="./css/css.css" rel="stylesheet" type="text/css">
+<script src="./js/js.js"></script>
 </head>
 
 <body>
@@ -12,7 +12,7 @@
 	<div id="main">
     	<div id="top">
         	<a href="?">
-            	<img src="./home_files/0416.jpg">
+            	<img src="./icon/0416.jpg">
             </a>
                         <div style="padding:10px;">
                 <a href="?">回首頁</a> |
