@@ -37,12 +37,12 @@
         <div id="right">
 
             <?php
-        $do=$_GET['do']??'home';
+        $do=$_GET['do']??'admin';
         $file='backend/'.$do.".php";
         if(file_exists($file)){
                 include $file;
         }else{
-                include 'backend/home.php';
+                include 'backend/admin.php';
         }
 
         ?>
