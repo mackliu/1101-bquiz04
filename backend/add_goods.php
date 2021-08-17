@@ -54,20 +54,14 @@ $("#big").on("change",function(){
     getMid($("#big").val())
 })
 
-
 function getBig(){
-    $.get("api/get_type.php",(list)=>{
-        $("#big").html(list)
-
+    $("#big").load("api/get_type.php",()=>{
         getMid($("#big").val())
     })
 }
 
 function getMid(id){
-    $.get("api/get_type.php",{'parent':id},(list)=>{
-        $("#mid").html(list)
-        
-    })
+    $("#mid").load("api/get_type.php",{'parent':id})
 }
 
 
