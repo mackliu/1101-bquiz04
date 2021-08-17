@@ -11,7 +11,7 @@
     </tr>
     <tr>
         <td class="ct tt">商品編號</td>
-        <td class="pp"><input type="text" name="no" value=""></td>
+        <td class="pp"><span id="showNo">完成分類後自動分配</span><input type="hidden" name="no" id="no" value=""></td>
     </tr>
     <tr>
         <td class="ct tt">商品名稱</td>
@@ -53,6 +53,9 @@ getBig()
 $("#big").on("change",function(){
     getMid($("#big").val())
 })
+$("#mid").on("change",function(){
+    getNo()
+})
 
 
 function getBig(){
@@ -66,9 +69,18 @@ function getBig(){
 function getMid(id){
     $.get("api/get_type.php",{'parent':id},(list)=>{
         $("#mid").html(list)
-        
+        getNo()
     })
 }
 
+function getNo(){
+/*     $.get("api/get_no.php",(no)=>{
+        $("#no").val(no)
+        $("#showNo").text(no)
+    }) */
 
+    let no=Math.floor(Math.random()*999999)+100000;
+    $("#no").val(no)
+    $("#showNo").text(no)
+}
 </script>
