@@ -78,7 +78,7 @@ function edit(dom,id){
         <td><?=$g['no'];?></td>
         <td><?=$g['name'];?></td>
         <td><?=$g['qt'];?></td>
-        <td><?=($g['sh']==1)?"上架中":"已下架";?></td>
+        <td id='sh<?=$g['id'];?>'><?=($g['sh']==1)?"上架中":"已下架";?></td>
         <td>
             <button onclick="location.href='?do=edit_goods&id=<?=$g['id'];?>'">修改</button>
             <button onclick="del('goods',<?=$g['id'];?>)">刪除</button>
@@ -92,3 +92,14 @@ function edit(dom,id){
     ?>
 </table>
 
+<script>
+
+function sh(action,id){
+    let sh=(action=='up')?1:0;
+    let str=(sh==1)?"上架中":"已下架";
+    $("#sh"+id).html(str)
+    $.post("api/show.php",{id,sh})
+}
+
+
+</script>
