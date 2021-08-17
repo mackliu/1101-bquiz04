@@ -20,14 +20,25 @@
 <div class="type-list">
 <table class=all>
 <?php
-foreach ($bigs as $key => $big) {
+foreach ($bigs as $key => $big) { 
     echo "<tr class='tt'>";
     echo "<td>{$big['name']}</td>";
-    echo "<td>";
+    echo "<td class='ct'>";
     echo "<button onclick='edit(this,{$big['id']})'>修改</button>";
     echo "<button onclick=del('type',{$big['id']})>刪除</button>";
     echo "</td>";
     echo "</tr>";
+
+    $mids=$Type->all(['parent'=>$big['id']]);
+    foreach ($mids as $key => $mid) {
+        echo "<tr class='pp'>";
+        echo "<td class='ct'>{$mid['name']}</td>";
+        echo "<td class='ct'>";
+        echo "<button onclick='edit(this,{$mid['id']})'>修改</button>";
+        echo "<button onclick=del('type',{$mid['id']})>刪除</button>";
+        echo "</td>";
+        echo "</tr>";
+    }
 }
 
 
