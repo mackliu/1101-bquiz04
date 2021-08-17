@@ -61,3 +61,34 @@ function edit(dom,id){
 
 <h1 class="ct">商品管理</h1>
 <div class="ct"><button onclick="location.href='?do=add_goods'">新增商品</button></div>
+<table class="all">
+    <tr class="tt ct">
+        <td>編號</td>
+        <td>商品名稱</td>
+        <td>庫存量</td>
+        <td>狀態</td>
+        <td>操作</td>
+    </tr>
+    <?php
+        $goods=$Goods->all();
+        foreach ($goods as $key => $g) {
+    ?>
+
+    <tr class="pp ct">
+        <td><?=$g['no'];?></td>
+        <td><?=$g['name'];?></td>
+        <td><?=$g['qt'];?></td>
+        <td><?=($g['sh']==1)?"上架中":"已下架";?></td>
+        <td>
+            <button onclick="location.href='?do=edit_goods&id=<?=$g['id'];?>'">修改</button>
+            <button onclick="del('goods',<?=$g['id'];?>)">刪除</button>
+            <button onclick="sh('up',<?=$g['id'];?>)">上架</button>
+            <button onclick="sh('down',<?=$g['id'];?>)">下架</button>
+
+        </td>
+    </tr>
+    <?php
+    }
+    ?>
+</table>
+
