@@ -1,4 +1,9 @@
-<h1 class="ct">新增商品</h1>
+<?php
+
+$goods=$Goods->find($_GET['id']);
+
+?>
+<h1 class="ct">修改商品</h1>
 <form action="api/save_goods.php" method='post' enctype="multipart/form-data">
 <table class="all">
     <tr>
@@ -11,23 +16,23 @@
     </tr>
     <tr>
         <td class="ct tt">商品編號</td>
-        <td class="pp"><span id="showNo">完成分類後自動分配</span><input type="hidden" name="no" id="no" value=""></td>
+        <td class="pp"><span id="showNo"><?=$goods['no'];?></span></td>
     </tr>
     <tr>
         <td class="ct tt">商品名稱</td>
-        <td class="pp"><input type="text" name="name" value=""></td>
+        <td class="pp"><input type="text" name="name" value="<?=$goods['name'];?>"></td>
     </tr>
     <tr>
         <td class="ct tt">商品價格</td>
-        <td class="pp"><input type="text" name="price" value=""></td>
+        <td class="pp"><input type="text" name="price" value="<?=$goods['price'];?>"></td>
     </tr>
     <tr>
         <td class="ct tt">規格</td>
-        <td class="pp"><input type="text" name="spec" value=""></td>
+        <td class="pp"><input type="text" name="spec" value="<?=$goods['spec'];?>"></td>
     </tr>
     <tr>
         <td class="ct tt">庫存量</td>
-        <td class="pp"><input type="text" name="qt" value=""></td>
+        <td class="pp"><input type="text" name="qt" value="<?=$goods['qt'];?>"></td>
     </tr>
     <tr>
         <td class="ct tt">商品圖片</td>
@@ -35,11 +40,12 @@
     </tr>
     <tr>
         <td class="ct tt">商品介紹</td>
-        <td class="pp"><textarea name="intro" style="width:80%;height:50px"></textarea></td>
+        <td class="pp"><textarea name="intro" style="width:80%;height:50px"><?=$goods['intro'];?></textarea></td>
     </tr>
 </table>
 <div class="ct">
-    <input type="submit" value="新增">
+    <input type='hidden' name='id' value="<?=$goods['id'];?>">
+    <input type="submit" value="修改">
     <input type="reset" value="重置">
     <input type="button" value="返回" onclick="location.href='?do=th'">
 </div>
@@ -61,7 +67,7 @@ $("#mid").on("change",function(){
 function getBig(){
     $.get("api/get_type.php",(list)=>{
         $("#big").html(list)
-
+        $("#big option[value='<?=$goods['big'];?>']").prop('selected',true)
         getMid($("#big").val())
     })
 }
@@ -69,18 +75,10 @@ function getBig(){
 function getMid(id){
     $.get("api/get_type.php",{'parent':id},(list)=>{
         $("#mid").html(list)
-        getNo()
+        $("#mid option[value='<?=$goods['mid'];?>']").prop('selected',true)
+
     })
 }
 
-function getNo(){
-/*     $.get("api/get_no.php",(no)=>{
-        $("#no").val(no)
-        $("#showNo").text(no)
-    }) */
-    //Math.floor(Math.random()*(max-min))+min;
-    let no=Math.floor(Math.random()*(999999-100000))+100000;
-    $("#no").val(no)
-    $("#showNo").text(no)
-}
+
 </script>
