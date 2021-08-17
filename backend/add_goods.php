@@ -78,8 +78,8 @@ function getNo(){
         $("#no").val(no)
         $("#showNo").text(no)
     }) */
-
-    let no=Math.floor(Math.random()*999999)+100000;
+    //Math.floor(Math.random()*(max-min))+min;
+    let no=Math.floor(Math.random()*(999999-100000))+100000;
     $("#no").val(no)
     $("#showNo").text(no)
 }
