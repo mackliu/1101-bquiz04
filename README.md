@@ -1,7 +1,5 @@
 # 題組四解題步驟
 
-test 
-
 #### 解題參考影片
 * **[影片列表](https://www.youtube.com/playlist?list=PLL26U2k-yzXsrWXiniLQf6OwVhxHthpRj)**
 * **[解題影片程式碼](https://github.com/mackliu/10901-bquiz04-v)**
