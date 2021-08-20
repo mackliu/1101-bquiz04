@@ -18,8 +18,15 @@ $mid=$Type->find($goods['mid'])['name'];
     </tr>
 </table>
 <div class="all tt ct">
-    購買數量: <input type="number" name="qt" value="1" style="width:50px"><img src="icon/0402.jpg">
+    購買數量: <input type="number" name="qt" id="qt" value="1" style="width:50px"><img src="icon/0402.jpg" id="submit">
 </div>
 <div class="ct">
     <button onclick="location.href='index.php'">返回</button>
 </div>
+<script>
+
+$("#submit").on("click",()=>{
+    location.href=`?do=buycart&id=<?=$_GET['id'];?>&qt=${$("#qt").val()}`;
+})
+
+</script>
