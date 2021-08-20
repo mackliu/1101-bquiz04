@@ -12,9 +12,9 @@ if(!isset($_SESSION['mem'])){
 echo "<h2 class='ct'>".$_SESSION['mem']."的購物車</h2>";
 
 
-if(empty($_SESSION['cart'])){
+if(!isset($_SESSION['cart']) || empty($_SESSION['cart'])){
     echo "<div class='ct'>購物車中尚無商品</div>";
-}
+}else{
 
 
 ?>
@@ -70,5 +70,7 @@ $(".del").on("click",function(){
 
 </script>
 
-
+<?php
+}
+?>
 
