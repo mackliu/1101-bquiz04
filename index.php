@@ -48,6 +48,26 @@
         </div>
         <div id="left" class="ct">
             <div style="min-height:400px;">
+            <div><a href="?type=0">全部商品(<?=$Goods->count();?>)</a></div>
+            <?php
+            $typeBig=$Type->all(['parent'=>0]);
+            foreach($typeBig as $tb){
+                echo "<div class='ww'>";
+                echo "<a href='?type={$tb['id']}'>{$tb['name']}(".$Goods->count(['big'=>$tb['id']]).")</a>";
+                $typeMid=$Type->all(['parent'=>$tb['id']]);
+                if(count($typeMid)>0){
+                    foreach($typeMid as $tm){
+                        echo "<div class='s'>";
+                        echo "<a href='?type={$tm['id']}'>{$tm['name']}(".$Goods->count(['mid'=>$tm['id']]).")</a>";
+                        echo "</div>";
+                    }
+                }
+
+                echo "</div>";
+            }
+
+
+            ?>
             </div>
             <span>
                 <div>進站總人數</div>

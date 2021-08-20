@@ -101,9 +101,14 @@ input[type=text],input[type=password]
 {
 	display:none;
 }
+#left .s a{
+	background-color: green;
+	color:white;
+}
 div.ww:hover > div.s
 {
 	display:block;
+	
 }
 .sb button
 {
