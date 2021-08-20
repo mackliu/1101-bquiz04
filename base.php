@@ -139,7 +139,7 @@ class DB{
                     ('".implode("','",$array)."')";
         }
 
-        //echo $sql;
+        echo $sql;
         return $this->pdo->exec($sql);
     }
 
@@ -156,4 +156,5 @@ $Mem=new DB("mem");
 $Admin=new DB('admin');
 $Type=new DB('type');
 $Goods=new DB('goods');
+$Ord=new DB('ord');
 ?>
