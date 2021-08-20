@@ -36,7 +36,7 @@ foreach($rows as $row){
         <td>
             <div class="tt ct"><?=$row['name'];?></div>
             <div>價錢:<?=$row['price'];?>
-            <a style="float:right" href='?do=buycart&id=<?=$row['id'];?>&qt=1'><img src="icon/0402.jpg"></a>
+            <a style="float:right" href='Javascript:cart(<?=$row['id'];?>,1)'><img src="icon/0402.jpg"></a>
         </div>
             <div>規格:<?=$row['spec'];?></div>
             <div>簡介:<?=mb_substr($row['intro'],0,25);?>...</div>
@@ -49,3 +49,15 @@ foreach($rows as $row){
 <?php
 }
 ?>
+
+<script>
+function cart(id,qt){
+    $.post('api/put_to_cart.php',{id,qt},(res)=>{
+        $("#buycart").show()
+        $("#buycart").html(res)
+        
+    })
+}
+
+
+</script>

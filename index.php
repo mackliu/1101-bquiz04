@@ -11,7 +11,20 @@
     <link href="./css/css.css" rel="stylesheet" type="text/css">
     <script src="./js/jquery-3.4.1.min.js"></script>
     <script src="./js/js.js"></script>
+<style>
+#buycart{
+    width: 85px;
+    position: fixed;
+    bottom: 140px;
+    right: 160px;
+    background:#ccc;
+    box-shadow:1px 1px 5px #999;
+    padding:3px;
+    display:none;
+}
 
+
+</style>
 </head>
 
 <body>
@@ -92,7 +105,24 @@
         <div id="bottom" style="line-height:70px;background:url(icon/bot.png); color:#FFF;" class="ct">
         <?=$Bot->find(1)['bot'];?> </div>
     </div>
-
+        <div id="buycart"></div>
 </body>
 
 </html>
+
+<?php
+if(!(isset($_GET['do']) && $_GET['do']=='buycart')){
+?>
+<script>
+$.get("api/check_cart.php",(res)=>{
+    if(res==1){
+        $("#buycart").show()
+        $("#buycart").load("api/get_cart.php")
+    }
+})
+
+</script>
+
+<?php
+}
+?>
