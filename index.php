@@ -11,12 +11,14 @@
     <link href="./css/css.css" rel="stylesheet" type="text/css">
     <script src="./js/jquery-3.4.1.min.js"></script>
     <script src="./js/js.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
 
 </head>
 
 <body>
     <iframe name="back" style="display:none;"></iframe>
     <div id="main">
+        {{ title }}
         <div id="top">
             <a href="?">
                 <img src="./icon/0416.jpg">
@@ -48,26 +50,13 @@
         </div>
         <div id="left" class="ct">
             <div style="min-height:400px;">
-            <div><a href="?type=0">全部商品(<?=$Goods->count(['sh'=>1]);?>)</a></div>
-            <?php
-            $typeBig=$Type->all(['parent'=>0]);
-            foreach($typeBig as $tb){
-                echo "<div class='ww'>";
-                echo "<a href='?type={$tb['id']}'>{$tb['name']}(".$Goods->count(['big'=>$tb['id'],'sh'=>1]).")</a>";
-                $typeMid=$Type->all(['parent'=>$tb['id']]);
-                if(count($typeMid)>0){
-                    foreach($typeMid as $tm){
-                        echo "<div class='s'>";
-                        echo "<a href='?type={$tm['id']}'>{$tm['name']}(".$Goods->count(['mid'=>$tm['id'],'sh'=>1]).")</a>";
-                        echo "</div>";
-                    }
-                }
-
-                echo "</div>";
-            }
-
-
-            ?>
+            <div class='ww' v-for="menu in menus" :key="menu">
+                <a :href="'?type='+menu.type">{{ menu.name }}({{menu.qt}})</a>
+                <div class="s" v-if="menu.subs!==undefined">
+                        <a v-for="sub in menu.subs" :href="'?type='+sub.type" :key='sub'>{{ sub.name }}({{sub.qt}})</a>
+                </div>
+            </div>
+            
             </div>
             <span>
                 <div>進站總人數</div>
@@ -96,3 +85,25 @@
 </body>
 
 </html>
+
+<script>
+
+    const main={
+        data(){
+            let title='測試';
+            let menus=''
+
+            return { title ,menus}
+        },
+
+        mounted(){
+            
+            $.get("api/get_menus.php",(res)=>{
+                let menus=JSON.parse(res)
+                this.menus=menus
+            })
+        }
+    }
+
+    Vue.createApp(main).mount("#main");
+</script>
