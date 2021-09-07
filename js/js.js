@@ -4,7 +4,7 @@ function lof(x)
 	location.href=x
 }
 
-function chkAcc(table){
+/* function chkAcc(table){
     let acc=$("#acc").val();
     $.get("api/chk_acc.php",{acc,table},(res)=>{
         if(parseInt(res)==1 || acc=='admin'){
@@ -13,7 +13,7 @@ function chkAcc(table){
             alert("此帳號可使用")
         }
     })
-}
+} */
 
 
 function reg(){

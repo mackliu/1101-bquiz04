@@ -91,11 +91,34 @@
     const main={
         data(){
             let title='測試';
-            let menus=''
-
-            return { title ,menus}
+            let menus='';
+            let acc='';
+            let table='mem';
+            let chkResult='';
+            return { title ,menus,acc,table ,chkResult}
         },
-
+        methods:{
+            chkAcc(table){
+            $.get("api/chk_acc.php",{'acc':this.acc,table},(res)=>{
+                if(parseInt(res)==1 || this.acc=='admin'){
+                    alert("帳號已被使用")
+                }else{
+                    alert("此帳號可使用")
+                }
+            })
+            }
+        },
+        watch:{
+            acc(newAcc,oldAcc){
+                $.get("api/chk_acc.php",{'acc':newAcc,'table':this.table},(res)=>{
+                if(parseInt(res)==1 || this.acc=='admin'){
+                    this.chkResult='此帳號己被使用'
+                }else{
+                    this.chkResult='此帳號可使用'
+                }
+            })
+            }
+        },
         mounted(){
             
             $.get("api/get_menus.php",(res)=>{

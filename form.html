@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="form">
+        <input type="text" name="name" id="name" v-model="name"><br>
+        <input type="text" name="newname" id="result" v-model="result">
+    </div>
+    
+</body>
+</html>
+
+<script>
+
+
+
+    Vue.createApp({
+        data(){
+            let name="劉勤永";
+            let result='';
+            return {name,result}
+        },
+        mounted(){
+
+        },
+        watch:{
+            name(newName,oldName){
+                if(newName.length<10){
+
+                    this.result='密碼長度請大於十個字元';
+                }else{
+                    this.result="符合長度"
+                }
+            },
+/*             result(newRes,oldRes){
+                this.name=newRes
+            } */
+        },
+        methods:{
+            setName(){
+                this.name=this.$refs.newName.value
+                console.log(this.$refs.newName)
+            }
+        }
+    }
+).mount("#form")
+
+
+
+</script>

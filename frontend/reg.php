@@ -7,8 +7,8 @@
     <tr>
         <td class="tt">帳號</td>
         <td class="pp">
-            <input type="text" name="acc" id="acc">
-            <button onclick="chkAcc('mem')">檢測帳號</button>
+            <input type="text" name="acc" id="acc" v-model='acc'><span>{{ chkResult }}</span>
+            <button @click="chkAcc('mem')">檢測帳號</button>
     </td>
     </tr>
     <tr>
