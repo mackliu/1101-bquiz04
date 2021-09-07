@@ -71,8 +71,9 @@ if(isset($_SESSION['admin'])){
 
     const main={
         data(){
-            const adminList={}
-            return { adminList }
+            const ListData={}
+            const mod='';
+            return { ListData ,mod}
         },
 
         mounted(){
@@ -81,24 +82,103 @@ if(isset($_SESSION['admin'])){
             if(url.indexOf("?")>=0){
                 mod=url.split("?")[1].split("=")[1];
             }
-            
-            $.getJSON("api/get_admin_list.php",(res)=>{
-                this.adminList=res
-                console.log(this.adminList)
+            this.mod=mod
+            let api='';
+            switch(mod){
+                case 'admin':
+                    api="api/get_admin_list.php";
+                break;
+                case 'order':
+                    api="api/get_order_list.php";
+                break;
+                case 'mem':
+                    api="api/get_mem_list.php";
+                break;
+                
+            }
+            $.getJSON(api,(res)=>{
+                this.ListData=res
+                console.log(api,res)
             })
         }
     }
     let app=Vue.createApp(main)
     app.component('BackendListTable', {
-    props:['head','rows'],
+    props:['head','rows','mod'],
+    data(){
+        const contents=new Array();
+        const lastItem=new Array();
+        const firstId=new Array();
+        return {
+            contents,lastItem,firstId
+        }
+    },
+    methods:{
+        oprator(m,id){
+            switch(m){
+                case 'edit':
+                    this.edit(this.mod,id)
+                break;
+                case 'del':
+                    this.del(this.mod,id)
+                break;
+            }
+        },
+        del(table,id){
+            console.log('刪除'+table+id)
+            if(table=='order'){
+                table='ord'
+            }
+            console.log(table,id)
+            $.post('api/del.php',{table,'id':id[0]},(res)=>{
+                console.log(res)
+                this.rows.forEach((row,idx)=>{
+                if(row[0]==id){
+                    this.contents.splice(idx,1)
+                    this.lastItem.splice(idx,1)
+                    this.firstId.splice(idx,1)
+                    this.rows.splice(idx,1)
+                }
+            })
+            })
+        },
+        edit(table,id){
+            console.log('編輯'+table+id)
+            let file='';
+            switch(table){
+                case "admin":
+                    file='?do=edit_admin&id='+id
+                break;
+                case "mem":
+                    file='?do=edit_mem&id='+id
+                break;
+            
+            }
+            location.href=file
+        }
+
+    },
+    watch:{
+        rows:function(){
+            this.rows.forEach((item)=>{
+                this.lastItem.push(item[item.length-1])
+                this.firstId.push(item.slice(0,1))
+                this.contents.push(item.slice(1,-1))
+            })
+           //console.log(this.lastItem,this.firstId,this.contents)
+        }
+    },
     template: `
     <table class='all'>
         <tr class='tt ct'>
             <td v-for="h in head">{{ h }}</td>
             
         </tr>
-        <tr class='pp ct'  v-for='r in rows'>
+        <tr class='pp ct' v-for='(r,idx) in contents' :key='idx'>
             <td v-for='d in r'>{{ d }}</td>
+            <td>
+                <button v-for="btn in lastItem[idx]" @click="oprator(btn,firstId[idx])">{{ btn }}</button>
+            </td>
         </tr>
     </table>
         `
