@@ -29,6 +29,7 @@ $data['goods_list'][]=[
     "img"=>$row['img'],
     "name"=>$row['name'],
     "price"=>$row['price'],
+    "spec"=>$row['spec'],
     "intro"=>mb_substr($row['intro'],0,25),
     
     ];
