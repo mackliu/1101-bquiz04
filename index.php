@@ -95,7 +95,8 @@
             let acc='';
             let table='mem';
             let chkResult='';
-            return { title ,menus,acc,table ,chkResult}
+            let goodsList={};
+            return { title ,menus,acc,table ,chkResult,goodsList}
         },
         methods:{
             chkAcc(table){
@@ -125,8 +126,37 @@
                 let menus=JSON.parse(res)
                 this.menus=menus
             })
+
+            $.getJSON("api/get_goods_list.php",(res)=>{
+                this.goodsList=res
+            })
         }
     }
+    let app=Vue.createApp(main)
 
-    Vue.createApp(main).mount("#main");
+    app.component('goods-list',{
+        data(){
+            
+        },
+        template:`
+        <table class="all">
+        <tr class="pp">
+            <td width="40%" height="150px">    
+                <a href='?do=detail&id='><img src="img/" style="width:80%;height:80%"></a>
+            </td>
+            <td>
+                <div class="tt ct"></div>
+                <div>價錢:
+                <a style="float:right" href='?do=buycart&id=&qt=1'><img src="icon/0402.jpg"></a>
+            </div>
+                <div>規格:</div>
+                <div>簡介:...</div>
+    
+            </td>
+        </tr>
+    </table>
+        `
+    })
+
+    app.mount("#main");
 </script>
