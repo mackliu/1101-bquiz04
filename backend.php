@@ -22,10 +22,11 @@ if(isset($_SESSION['admin'])){
     <link href="./css/css.css" rel="stylesheet" type="text/css">
     <script src="./js/jquery-3.4.1.min.js"></script>
     <script src="./js/js.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
 </head>
 
 <body>
-    <iframe name="back" style="display:none;"></iframe>
+
     <div id="main">
         <div id="top">
             <a href="index.php">
@@ -64,3 +65,44 @@ if(isset($_SESSION['admin'])){
 </body>
 
 </html>
+
+
+<script>
+
+    const main={
+        data(){
+            const adminList={}
+            return { adminList }
+        },
+
+        mounted(){
+            let url=location.href
+            let mod
+            if(url.indexOf("?")>=0){
+                mod=url.split("?")[1].split("=")[1];
+            }
+            
+            $.getJSON("api/get_admin_list.php",(res)=>{
+                this.adminList=res
+                console.log(this.adminList)
+            })
+        }
+    }
+    let app=Vue.createApp(main)
+    app.component('BackendListTable', {
+    props:['head','rows'],
+    template: `
+    <table class='all'>
+        <tr class='tt ct'>
+            <td v-for="h in head">{{ h }}</td>
+            
+        </tr>
+        <tr class='pp ct'  v-for='r in rows'>
+            <td v-for='d in r'>{{ d }}</td>
+        </tr>
+    </table>
+        `
+    })
+
+    app.mount("#main");
+</script>

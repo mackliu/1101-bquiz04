@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="main">
+        <backend-list-table></backend-list-table>
+
+
+    </div>
+</body>
+</html>
+<script>
+const main={}
+
+let app=Vue.createApp(main);
+
+app.component('BackendListTable', {
+  data() {
+      let head=['帳號','密碼','操作','部門'];
+      let rows=[['admin','1234','','人事'],['root','5678','','財會']];
+    return {
+      head,rows
+    }
+  },
+  template: `
+    <table>
+        <tr class='tt ct'>
+            <td v-for="h in head">{{ h }}</td>
+            
+        </tr>
+        <tr class='pp ct'  v-for='r in rows'>
+            <td v-for='d in r'>{{ d }}</td>
+        </tr>
+    </table>
+        `
+})
+
+app.mount("#main")
+</script>
