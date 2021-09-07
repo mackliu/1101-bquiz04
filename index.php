@@ -121,22 +121,29 @@
             }
         },
         mounted(){
-            
+            let url=location.href
+            let type
+            if(url.indexOf("?")>=0){
+                type=url.split("?")[1].split("=")[1];
+            }
             $.get("api/get_menus.php",(res)=>{
                 let menus=JSON.parse(res)
                 this.menus=menus
             })
 
-            $.getJSON("api/get_goods_list.php",(res)=>{
+            $.getJSON("api/get_goods_list.php",{type},(res)=>{
                 this.goodsList=res
+
             })
         }
     }
     let app=Vue.createApp(main)
 
     app.component('goods-list',{
+        props:[],
         data(){
-            
+
+            return {}
         },
         template:`
         <table class="all">
